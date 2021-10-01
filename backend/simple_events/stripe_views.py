@@ -11,6 +11,16 @@ def test_payment(request):
     test_payment_intent = stripe.PaymentIntent.create(
         amount=1000, currency='usd',
         payment_method_types=['card'],
-        receipt_email='test@example.com'
+        receipt_email='andresholee@gmail.com'
     )
     return Response(status=status.HTTP_200_OK, data=test_payment_intent)
+
+@api_view(['POST'])
+def process_payment(request, data):
+
+    payment = stripe.PaymentIntent.create(
+        amount=data['amount'], currency='usd',
+        payment_method_types=['card'],
+        receipt_email=data['email']
+    )
+    return Response(status=status.HTTP_200_OK, data=payment)

@@ -9,6 +9,7 @@ from .token import MyTokenObtainPairView
 router = routers.DefaultRouter()
 router.register('participants', views.ParticipantView)
 router.register('event', views.EventView)
+router.register('filterEvents', views.Simple_Event_View, basename='filter_events')
 
 routerCreate = routers.SimpleRouter()
 routerCreate.register('user', views.Model_User_View, basename='create_user')

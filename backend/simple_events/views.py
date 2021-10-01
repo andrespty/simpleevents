@@ -20,6 +20,10 @@ class EventView(viewsets.ModelViewSet):
     serializer_class = Event_Full_Serializer
     queryset = Event.objects.all()
 
+class Simple_Event_View(viewsets.ModelViewSet):
+    serializer_class = Event_Simple_Serializer
+    queryset = Event.objects.all()
+
 
 class Model_User_View(viewsets.ModelViewSet):
     permission_classes = (permissions.AllowAny,)
