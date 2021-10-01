@@ -20,28 +20,20 @@ class EventView(viewsets.ModelViewSet):
     serializer_class = Event_Full_Serializer
     queryset = Event.objects.all()
 
-class Create_User_View(APIView):
+
+class Model_User_View(viewsets.ModelViewSet):
     permission_classes = (permissions.AllowAny,)
-    serializer_class = Create_User_Serializer
- 
-    def post(self, request):
-        serializer = self.serializer_class(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
+    serializer_class = Model_User_Serializer
+    queryset = User.objects.all()
 
-class Create_Event_View(APIView):
-    serializer_class = Create_Event_Serializer
-    def post(self, request):
-        serializer = self.serializer_class(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
+class Model_Event_View(viewsets.ModelViewSet):
+    serializer_class = Model_Event_Serializer
+    queryset = Event.objects.all()
 
-class Create_Participant_View(APIView):
-    serializer_class = Create_Participant_Serializer
-    def post(self, request):
-        serializer = self.serializer_class(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
+class Model_Participant_View(viewsets.ModelViewSet):
+    serializer_class = Model_Participant_Serializer
+    queryset = Participant.objects.all()
+
+class Model_Ticket_View(viewsets.ModelViewSet):
+    serializer_class = Model_Ticket_Serializer
+    queryset = Ticket.objects.all()

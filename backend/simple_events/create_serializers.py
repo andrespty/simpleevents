@@ -4,7 +4,7 @@ from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 import json
 from .token import *
 
-class Create_User_Serializer(serializers.ModelSerializer):
+class Model_User_Serializer(serializers.ModelSerializer):
     password = serializers.CharField(min_length=8, write_only=True)
     token = serializers.SerializerMethodField()
 
@@ -26,7 +26,7 @@ class Create_User_Serializer(serializers.ModelSerializer):
         token = MyTokenObtainPairSerializer.get_token(obj)
         return {'access':f'{token.access_token}', 'refresh':f'{token}'}
 
-class Create_Event_Serializer(serializers.ModelSerializer):
+class Model_Event_Serializer(serializers.ModelSerializer):
     class Meta:
         model = Event
         fields = '__all__'
@@ -36,7 +36,7 @@ class Create_Event_Serializer(serializers.ModelSerializer):
         instance.save()
         return instance
 
-class Create_Participant_Serializer(serializers.ModelSerializer):
+class Model_Participant_Serializer(serializers.ModelSerializer):
     class Meta:
         model = Participant
         fields = '__all__'
@@ -46,7 +46,7 @@ class Create_Participant_Serializer(serializers.ModelSerializer):
         instance.save()
         return instance
 
-class Create_Ticket_Serializer(serializers.ModelSerializer):
+class Model_Ticket_Serializer(serializers.ModelSerializer):
     class Meta:
         model = Ticket
         fields = '__all__'
