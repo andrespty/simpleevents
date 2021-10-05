@@ -23,7 +23,7 @@ class Event(models.Model):
     name            = models.CharField(max_length=32, blank=False)
     date            = models.DateTimeField(verbose_name='date')
 
-    poster          = models.ImageField(upload_to='')
+    # poster          = models.ImageField(upload_to='')
 
     def __str__(self):
         return f'{self.name}'
