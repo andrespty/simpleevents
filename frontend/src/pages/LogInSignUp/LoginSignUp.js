@@ -35,7 +35,7 @@ function LoginSignUp({ isLogin }) {
                 }
                 
                 <Field label='Email' placeholder='Email' onChange={(e) => setInfo({'attribute':'email', 'value': e.target.value})}/>
-                <Field label='Password' placeholder='Password' type='password' onChange={(e) => setInfo({'attribute':'password1', 'value': e.target.value})}/>
+                <Field label='Password' placeholder='Password' type='password' onChange={(e) => setInfo({'attribute':'password', 'value': e.target.value})}/>
                 
                 {
                     isLogin
