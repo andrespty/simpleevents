@@ -7,17 +7,17 @@ const useLoginSignup = (isLogin) => {
     const submit = (e) => {
         e.preventDefault()
 
-        // fetch(`${url}/create/user/`, {
-        //     method: 'POST',
-        //     headers: {
-        //         'Content-Type': 'application/json'
-        //     },
-        //     body: JSON.stringify(info)
-        // })
-        // .then(res => res.json())
-        // .then(json => {
-        //     console.log(json)
-        // })
+        fetch(`${url}/api/models/user/`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(info)
+        })
+        .then(res => res.json())
+        .then(json => {
+            console.log(json)
+        })
 
         console.log('submited')
     }
@@ -31,7 +31,7 @@ const initialState = {
     first_name: '',
     last_name: '',
     email: '',
-    password1: '',
+    password: '',
     password2: ''
 }
 
