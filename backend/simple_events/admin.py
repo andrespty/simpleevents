@@ -5,10 +5,10 @@ class UserAdmin(admin.ModelAdmin):
     model = User
 
 class ParticipantAdmin(admin.ModelAdmin):
-    fields = ['name', 'email', 'client', 'event', 'isGuest']
+    fields = ['name', 'email', 'client', 'event', 'isGuest', 'ticket']
 
 class EventAdmin(admin.ModelAdmin):
-    fields = ['date', 'price', 'name', 'creator']
+    fields = ['date', 'name', 'creator']
 
 class TicketAdmin(admin.ModelAdmin):
     fields = ['event','name','price']

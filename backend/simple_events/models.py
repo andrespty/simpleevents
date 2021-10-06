@@ -23,13 +23,18 @@ class Event(models.Model):
     name            = models.CharField(max_length=32, blank=False)
     date            = models.DateTimeField(verbose_name='date')
 
+    # poster          = models.ImageField(upload_to='')
+
     def __str__(self):
         return f'{self.name}'
 
 class Ticket(models.Model):
-    event           = models.ForeignKey(Event, on_delete=models.CASCADE)
+    event           = models.ForeignKey(Event, on_delete=models.CASCADE, related_name='tickets')
     name            = models.CharField(max_length=15)
     price           = models.DecimalField(verbose_name='price', decimal_places=2, max_digits=6)
+
+    def __str__(self):
+        return f'{self.name} - {self.event.name}'
 
 class Participant(models.Model):
     client          = models.ForeignKey(User, on_delete=models.CASCADE, related_name='events_participating', blank=True, null=True)

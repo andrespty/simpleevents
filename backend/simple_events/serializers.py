@@ -22,12 +22,18 @@ class Event_Simple_Serializer(serializers.ModelSerializer):
         model = Event
         fields = ['name', 'date']
 
+class Ticket_Simple_Serializer(serializers.ModelSerializer):
+    class Meta:
+        model = Ticket
+        fields = ['name', 'price']
+
 class Event_Full_Serializer(serializers.ModelSerializer):
 
     participants = ParticipantSerializer(many=True)
     creator      = UserSerializer()
+    tickets      = Ticket_Simple_Serializer(many=True)
 
     class Meta:
         model = Event
-        fields = ['creator', 'name', 'date', 'price', 'participants']
+        fields = ['creator', 'name', 'date', 'participants', 'tickets']
 
