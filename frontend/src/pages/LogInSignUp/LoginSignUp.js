@@ -13,7 +13,7 @@ function LoginSignUp({ isLogin }) {
         <Box w={{base:'90%', sm:'70%', md:'50%', lg:'40%'}} minH={'40%'} p={3} borderRadius={6} >
             <Flex direction='column'>
                 
-                <Heading my={2}>
+                <Heading my={2} textColor='secondary.900'>
                     {
                         isLogin
                         ? 'Log In'
@@ -92,7 +92,7 @@ function LoginSignUp({ isLogin }) {
                 
                 <Spacer />
                 
-                <Button type='submit' isLoading={loading} form='login-signup' mt={6}>
+                <Button type='submit' isLoading={loading} form='login-signup' mt={6} colorScheme='primary' >
                     {
                         isLogin
                         ? 'Log In'
