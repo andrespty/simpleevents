@@ -3,6 +3,7 @@ import { url } from "../../App"
 import { UserContext } from "../../App"
 import { useContext } from "react"
 import { CheckPasswordsAreSame, CheckPassword } from "../../utils/UtilitiesFunctions"
+import { useParams, useHistory } from 'react-router'
 
 const useLoginSignup = (isLogin) => {
     const [ info, setInfo ] = useReducer(reducer, initialState)
@@ -10,6 +11,8 @@ const useLoginSignup = (isLogin) => {
     const { setUser } = useContext(UserContext)
     const [ loading, setLoading ] = useState(false)
 
+    // let { redirect, id } = useParams()  //used for redirection to the source where the user came from
+    let history = useHistory()
     const fetchUrl = isLogin ? `${url}/api/token/` : `${url}/api/models/user/`
 
     const submit = (e) => {
@@ -45,6 +48,7 @@ const useLoginSignup = (isLogin) => {
                 if ((isLogin && !json.access) || (!isLogin && !json.token)){
                     console.log('error')
                     setError(json)
+                    hasError=true
                 }
                 else{
                     if ( isLogin ){
@@ -61,6 +65,9 @@ const useLoginSignup = (isLogin) => {
                     setError()
                 }
                 setLoading(false)
+                if (!hasError){
+                    history.push('/')
+                }
             })
         }
 
