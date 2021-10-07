@@ -1,6 +1,6 @@
 import React from 'react'
 import { Box, Center, Heading, Input, Button, FormControl, FormLabel, Grid, GridItem, FormErrorMessage, Collapse, 
-    Alert, AlertDescription, AlertIcon } from '@chakra-ui/react'
+    Alert, AlertDescription, AlertIcon, Flex, Spacer, Text, Link } from '@chakra-ui/react'
 import useLoginSignup from './useLoginSignup'
 
 
@@ -9,10 +9,10 @@ function LoginSignUp({ isLogin }) {
     const { setInfo, submit, loading, error } = useLoginSignup(isLogin)
 
     return (
-        <Center h={window.innerHeight}>
-        <form onSubmit={(e) => submit(e)}>
-            <Box bg='whiteAlpha.100' p={3} borderRadius={6} >
-
+        <Center h={window.innerHeight - 100}>
+        <Box w={{base:'90%', sm:'70%', md:'50%', lg:'40%'}} minH={'40%'} p={3} borderRadius={6} >
+            <Flex direction='column'>
+                
                 <Heading my={2}>
                     {
                         isLogin
@@ -21,6 +21,7 @@ function LoginSignUp({ isLogin }) {
                     }
                 </Heading>
 
+                <form onSubmit={(e) => submit(e)} bg='green.400' height='100%' id='login-signup'>
                 {
                     // Alert error when logging in
                     isLogin
@@ -87,8 +88,11 @@ function LoginSignUp({ isLogin }) {
                         isInvalid={error.password2 === '' ? false : true}
                     />
                 }
+                </form>
                 
-                <Button type='submit' isLoading={loading}>
+                <Spacer />
+                
+                <Button type='submit' isLoading={loading} form='login-signup' mt={6}>
                     {
                         isLogin
                         ? 'Log In'
@@ -96,15 +100,40 @@ function LoginSignUp({ isLogin }) {
                     }
                 </Button>
 
-                <Button onClick={() => console.log(error)}>Click</Button>
+                <HasAccount isLogin={isLogin} />
 
-            </Box>
-        </form>
+            </Flex>
+            
+        </Box>
         </Center>
     )
 }
 
 export default LoginSignUp
+
+const HasAccount = (isLogin) => {
+    if (isLogin){
+        return(
+            <Text align='center' fontSize='sm' lineHeight={1.2} mt={2}>
+                Don't have an account? <br/>
+                <Link href={'/signup'}>
+                    Create on here!
+                </Link>
+            </Text>
+        )
+    }
+    else{
+        return(
+            <Text align='center' fontSize='sm' lineHeight={1.2} mt={2}>
+                Already have an account? <br/>
+                <Link href={'/login'}>
+                    Log In here!
+                </Link>
+            </Text>
+        )
+    }
+}
+
 
 const Field = ({ label, placeholder, error, isInvalid, ...Children }) => {
     return(
