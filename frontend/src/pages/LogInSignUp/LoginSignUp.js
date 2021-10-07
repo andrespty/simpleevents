@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {memo} from 'react'
 import { Box, Center, Heading, Input, Button, FormControl, FormLabel, Grid, GridItem, FormErrorMessage, Collapse, 
     Alert, AlertDescription, AlertIcon, Flex, Spacer, Text, Link } from '@chakra-ui/react'
 import useLoginSignup from './useLoginSignup'
@@ -111,8 +111,9 @@ function LoginSignUp({ isLogin }) {
 
 export default LoginSignUp
 
-const HasAccount = (isLogin) => {
+const HasAccount = memo(({isLogin}) => {
     if (isLogin){
+        console.log(isLogin)
         return(
             <Text align='center' fontSize='sm' lineHeight={1.2} mt={2}>
                 Don't have an account? <br/>
@@ -132,7 +133,7 @@ const HasAccount = (isLogin) => {
             </Text>
         )
     }
-}
+})
 
 
 const Field = ({ label, placeholder, error, isInvalid, ...Children }) => {
