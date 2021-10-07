@@ -78,7 +78,14 @@ function LoginSignUp({ isLogin }) {
                 {
                     isLogin
                     ? null
-                    : <Field label='Password confirmation' placeholder='Confirm Password' type='password' onChange={(e) => setInfo({'attribute':'password2', 'value': e.target.value})}/>
+                    : <Field 
+                        label='Password confirmation' 
+                        placeholder='Confirm Password' 
+                        type='password' 
+                        onChange={(e) => setInfo({'attribute':'password2', 'value': e.target.value})}
+                        error={error.password2}
+                        isInvalid={error.password2 === '' ? false : true}
+                    />
                 }
                 
                 <Button type='submit' isLoading={loading}>

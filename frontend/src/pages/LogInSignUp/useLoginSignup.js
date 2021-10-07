@@ -2,6 +2,7 @@ import { useReducer, useState } from "react"
 import { url } from "../../App"
 import { UserContext } from "../../App"
 import { useContext } from "react"
+import { CheckPasswordsAreSame, CheckPassword } from "../../utils/UtilitiesFunctions"
 
 const useLoginSignup = (isLogin) => {
     const [ info, setInfo ] = useReducer(reducer, initialState)
@@ -13,37 +14,55 @@ const useLoginSignup = (isLogin) => {
 
     const submit = (e) => {
         e.preventDefault()
-        setLoading(true)
-        fetch(fetchUrl, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(info)
-        })
-        .then(res => res.json())
-        .then(json => {
-            console.log(json)
-            if ((isLogin && !json.access) || (!isLogin && !json.token)){
-                console.log('error')
-                setError(json)
+        let hasError = false
+        if (!isLogin){
+            if (!CheckPassword(info.password)){
+                setError({password:'Password must be between 6 - 20 characters long, and contain at least one numeric digit and one non-numeric digit.'})
+                hasError=true
             }
-            else{
-                if ( isLogin ){
-                    let user = JSON.parse(window.atob(json['access'].split('.')[1]))
-                    setUser({type:'loginSignup', ...user})
-                    localStorage.setItem('access', json.access)
-                    localStorage.setItem('refresh', json.refresh)
+            if (!CheckPasswordsAreSame(info.password, info.password2)){
+                setError({
+                    password:'Passwords must match.',
+                    password2:'Passwords must match.'
+                })
+                hasError = true
+            }
+            
+        }
+
+        if (!hasError){
+            setLoading(true)
+            fetch(fetchUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(info)
+            })
+            .then(res => res.json())
+            .then(json => {
+                console.log(json)
+                if ((isLogin && !json.access) || (!isLogin && !json.token)){
+                    console.log('error')
+                    setError(json)
                 }
                 else{
-                    setUser({type:'loginSignup', ...json})
-                    localStorage.setItem('access', json.token.access)
-                    localStorage.setItem('refresh', json.token.refresh)
+                    if ( isLogin ){
+                        let user = JSON.parse(window.atob(json['access'].split('.')[1]))
+                        setUser({type:'loginSignup', ...user})
+                        localStorage.setItem('access', json.access)
+                        localStorage.setItem('refresh', json.refresh)
+                    }
+                    else{
+                        setUser({type:'loginSignup', ...json})
+                        localStorage.setItem('access', json.token.access)
+                        localStorage.setItem('refresh', json.token.refresh)
+                    }
+                    setError()
                 }
-                setError()
-            }
-            setLoading(false)
-        })
+                setLoading(false)
+            })
+        }
 
         console.log('submited')
     }
@@ -66,6 +85,7 @@ const initialStateErrors = {
     last_name: '',
     email: '',
     password: '',
+    password2:'',
     detail: ''
 }
 
