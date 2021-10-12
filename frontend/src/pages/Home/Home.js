@@ -1,33 +1,44 @@
 import React, { useEffect, useState } from 'react'
-import EventCard from '../../components/Cards/EventCard'
+import { Route, Switch, useRouteMatch } from 'react-router'
+import { Box } from '@chakra-ui/react'
 import { get_events } from '../../utils/FetchFunctions'
-
+import EventCard from '../../components/Cards/EventCard'
 
 function Home() {
 
-    const [ info, setInfo ] = useState()
-    const [ isLoading, setIsLoading ] = useState(true)
+    let { path } = useRouteMatch()
 
+    const [ info, setInfo ] = useState()
     useEffect(() => {
-        setIsLoading(true)
-        console.log('Hello')
         get_events()
-        .then(json => {
-            setInfo(json)
-            setIsLoading(false)
+        .then(json=>{
+            console.log(json)
+            setInfo(json[4])
         })
-    },[])
+    }, [])
 
     return (
-        <div>
-            Home
-            {
-                isLoading
-                ? null
-                :<EventCard info={info[0]} />
-            }
+        <Box>
             
-        </div>
+            <Switch>
+
+                <Route path={`${path}/events/`}>
+                    events
+                </Route>
+
+                <Route path={`${path}/`}>
+                    home
+                </Route>
+
+            </Switch>
+
+            {
+                info
+                ?<EventCard info={info} />
+                : null
+            }
+
+        </Box>
     )
 }
 

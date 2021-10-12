@@ -7,13 +7,13 @@ class UserAdmin(admin.ModelAdmin):
 class ParticipantAdmin(admin.ModelAdmin):
     fields = ['name', 'email', 'client', 'event', 'isGuest', 'ticket']
 
+@admin.register(Event)
 class EventAdmin(admin.ModelAdmin):
-    fields = ['date', 'name', 'creator']
+    list_display = ('creator', 'name')
 
 class TicketAdmin(admin.ModelAdmin):
     fields = ['event','name','price']
 
 admin.site.register(User, UserAdmin)
 admin.site.register(Participant, ParticipantAdmin)
-admin.site.register(Event, EventAdmin)
 admin.site.register(Ticket, TicketAdmin)
