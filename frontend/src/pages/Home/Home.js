@@ -17,6 +17,7 @@ function Home() {
         })
     }, [])
 
+    console.log(path)
     return (
         <Box>
             
