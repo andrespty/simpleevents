@@ -6,6 +6,7 @@ from .models import *
 import json
 from rest_framework.response import Response
 from rest_framework.decorators import api_view, permission_classes
+from rest_framework.parsers import FormParser, MultiPartParser, JSONParser
 import random
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.views import APIView
@@ -33,6 +34,7 @@ class Model_User_View(viewsets.ModelViewSet):
 class Model_Event_View(viewsets.ModelViewSet):
     serializer_class = Model_Event_Serializer
     queryset = Event.objects.all()
+    parser_classes = (FormParser, MultiPartParser, JSONParser)
 
 class Model_Participant_View(viewsets.ModelViewSet):
     serializer_class = Model_Participant_Serializer

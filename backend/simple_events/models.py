@@ -4,6 +4,9 @@ from django.utils.translation import ugettext_lazy as _
 
 from .managers import *
 
+def user_directory_path(instance, filename):
+    return 'images/{0}/'.format(filename)
+
 class User(AbstractUser):
     username = None
     email = models.EmailField(_('email address'), unique=True)
@@ -23,7 +26,7 @@ class Event(models.Model):
     name            = models.CharField(max_length=32, blank=False)
     date            = models.DateTimeField(verbose_name='date')
 
-    # poster          = models.ImageField(upload_to='')
+    poster          = models.ImageField(upload_to='images', default='images/placeholder.png')
 
     def __str__(self):
         return f'{self.name}'
