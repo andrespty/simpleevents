@@ -1,1 +1,5 @@
 /backend/backend/.env
+/backend/backend/__pycache__
+/backend/simple_events/__pycache__
+/backend/simple_events/migrations
+/backend/db.sqlite3
