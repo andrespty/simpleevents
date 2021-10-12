@@ -1,7 +1,10 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Home from './pages/Home/Home';
+import Events from "./pages/Events/Events";
 import LoginSignUp from "./pages/LogInSignUp/LoginSignUp";
 import { createContext, useReducer } from "react";
+import PageTemplate from "./utils/PageTemplates";
+import Dashboard from "./pages/Dashboard/Dashboard";
 
 export const url = 'http://127.0.0.1:8000'
 
@@ -11,7 +14,6 @@ function App() {
 
   return (
     <UserContext.Provider value={{user, setUser}}>
-      <button onClick={() => console.log(user)}>click</button>
       <Router>
         <Switch>
         
@@ -23,12 +25,27 @@ function App() {
             <LoginSignUp isLogin={false}/>
           </Route>
 
+          <Route path='/events'>
+            <PageTemplate>
+              <Events />
+            </PageTemplate>
+          </Route>
+
+          <Route path='/dashboard'>
+            <PageTemplate>
+              <Dashboard />
+            </PageTemplate>
+          </Route>
+
           <Route path='/'>
-            <Home/>
+            <PageTemplate>
+              <Home/>
+            </PageTemplate>
           </Route>
 
         </Switch>
       </Router>
+      <button onClick={() => console.log(user)}>click</button>
     </UserContext.Provider>
   );
 }
