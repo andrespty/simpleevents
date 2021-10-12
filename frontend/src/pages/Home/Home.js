@@ -1,12 +1,22 @@
 import React, { useEffect, useState } from 'react'
 import { Route, Switch, useRouteMatch } from 'react-router'
 import { Box } from '@chakra-ui/react'
+import { get_events } from '../../utils/FetchFunctions'
+import EventCard from '../../components/Cards/EventCard'
 
 function Home() {
 
     let { path } = useRouteMatch()
 
-    console.log(path)
+    const [ info, setInfo ] = useState()
+    useEffect(() => {
+        get_events()
+        .then(json=>{
+            console.log(json)
+            setInfo(json[4])
+        })
+    }, [])
+
     return (
         <Box>
             
@@ -21,6 +31,13 @@ function Home() {
                 </Route>
 
             </Switch>
+
+            {
+                info
+                ?<EventCard info={info} />
+                : null
+            }
+
         </Box>
     )
 }
