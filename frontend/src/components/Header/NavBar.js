@@ -1,8 +1,8 @@
 import React from 'react'
-import { ButtonGroup, Button, Box } from '@chakra-ui/react'
+import { ButtonGroup, Button, Box, Stack } from '@chakra-ui/react'
 import { useLocation } from 'react-router'
 
-function NavBar({ redirect }) {
+function NavBar({ redirect, direction='horizontal' }) {
 
     let location = useLocation()
 
@@ -16,17 +16,23 @@ function NavBar({ redirect }) {
     }
 
     return (
-        <Box>
-            <ButtonGroup variant='ghost' spacing={2}>
-                <Button onClick={() => redirect('/')} variant={isActive('/')}>Home</Button>
-                <Button onClick={() => redirect('/events')} variant={isActive('/events')}>Events</Button>
-                <Button onClick={() => redirect('/dashboard')} variant={isActive('/dashboard')}>Dashboard</Button>
-                <Button onClick={() => redirect('/contact')} variant={isActive('/contact')}>Contact Us</Button>
-            </ButtonGroup>
+        <Box w='100%' h='100%'>
+            <Stack spacing={20} direction={direction} isFullWidth >
+                <NavButton onClick={() => redirect('/')} variant={isActive('/')}>Home</NavButton>
+                <NavButton onClick={() => redirect('/events')} variant={isActive('/events')}>Events</NavButton>
+                <NavButton onClick={() => redirect('/dashboard')} variant={isActive('/dashboard')}>Dashboard</NavButton>
+                <NavButton onClick={() => redirect('/contact')} variant={isActive('/contact')}>Contact Us</NavButton>
+            </Stack>
         </Box>
     )
 }
 
 export default NavBar
 
-
+const NavButton = ({ path, children, ...props}) => {
+    return(
+        <Button size='lg' {...props}>
+            {children}
+        </Button>
+    )
+}

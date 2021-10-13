@@ -1,4 +1,4 @@
-import { darken, whiten } from "@chakra-ui/theme-tools"
+import { darken } from "@chakra-ui/theme-tools"
 
 export const Button = {
     baseStyle: {

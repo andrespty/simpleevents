@@ -3,6 +3,7 @@ import { Heading, Flex, Box, Spacer, IconButton } from "@chakra-ui/react"
 import { useHistory } from 'react-router'
 import { HamburgerIcon } from '@chakra-ui/icons'
 import NavBar from './NavBar'
+import DrawerMenu from './DrawerMenu'
 
 function Header() {
 
@@ -22,10 +23,12 @@ function Header() {
 
             <Spacer/>
 
-            <NavBar redirect={redirect} />
+            <Box display={{base:'none', md:'inherit'}}>
+                <NavBar redirect={redirect} />
+            </Box>
 
-            <Box>
-                <IconButton icon={<HamburgerIcon fontSize='xl'/>} />
+            <Box display={{base:'inherit', md:'none'}}>
+                <DrawerMenu redirect={redirect}/>
             </Box>
         </Flex>
     )
