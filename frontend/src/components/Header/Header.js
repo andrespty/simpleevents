@@ -1,5 +1,5 @@
 import React from 'react'
-import { Heading, Flex, Box, Spacer, ButtonGroup, Button, IconButton } from "@chakra-ui/react"
+import { Heading, Flex, Box, Spacer, IconButton } from "@chakra-ui/react"
 import { useHistory } from 'react-router'
 import { HamburgerIcon } from '@chakra-ui/icons'
 import NavBar from './NavBar'
@@ -13,7 +13,7 @@ function Header() {
     }
 
     return (
-        <Flex bg='blue' p={2} borderRadius={2} >
+        <Flex bg='white' p={4} borderBottomRadius={20} >
             <Box>
                 <Heading onClick={() => redirect('')} cursor='pointer'>
                     Simple Events
