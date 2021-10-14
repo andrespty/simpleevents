@@ -16,8 +16,8 @@ function NavBar({ redirect, direction='horizontal' }) {
     }
 
     return (
-        <Box w='100%' h='100%'>
-            <Stack spacing={20} direction={direction} isFullWidth >
+        <Box w='100%'>
+            <Stack spacing={15} direction={direction} isFullWidth >
                 <NavButton onClick={() => redirect('/')} variant={isActive('/')}>Home</NavButton>
                 <NavButton onClick={() => redirect('/events')} variant={isActive('/events')}>Events</NavButton>
                 <NavButton onClick={() => redirect('/dashboard')} variant={isActive('/dashboard')}>Dashboard</NavButton>
@@ -29,6 +29,14 @@ function NavBar({ redirect, direction='horizontal' }) {
 
 export default NavBar
 
+export const SignedUpNavBar = () => {
+    return(
+        <Box>
+
+        </Box>
+    )
+}
+
 const NavButton = ({ path, children, ...props}) => {
     return(
         <Button size='lg' {...props}>
@@ -36,3 +44,5 @@ const NavButton = ({ path, children, ...props}) => {
         </Button>
     )
 }
+
+

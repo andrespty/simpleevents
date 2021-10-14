@@ -1,6 +1,6 @@
 import React from 'react'
 import { Drawer, DrawerBody, DrawerFooter, DrawerHeader, DrawerOverlay, DrawerContent, DrawerCloseButton, 
-    Box, IconButton, useDisclosure } from "@chakra-ui/react"
+    Box, IconButton, useDisclosure, Flex, Spacer } from "@chakra-ui/react"
 import { HamburgerIcon } from '@chakra-ui/icons'
 import NavBar from './NavBar'
 
@@ -10,6 +10,7 @@ function DrawerMenu({ redirect }) {
 
     return (
         <Box>
+
             <IconButton 
                 icon={<HamburgerIcon fontSize='xl' />} 
                 variant='ghost'       
@@ -22,13 +23,26 @@ function DrawerMenu({ redirect }) {
             >
                 <DrawerOverlay />
                 <DrawerContent>
+
+                    <DrawerHeader>
+                        Simple Events
+                    </DrawerHeader>
+                
+                    <Spacer/>
+
                     <DrawerBody>
-                        
-                        <NavBar direction='column' redirect={redirect} />
+
+                        <NavBar direction='column' redirect={redirect} />   
 
                     </DrawerBody>
+
+                    <DrawerFooter>
+                        Hello
+                    </DrawerFooter>
+
                 </DrawerContent>
             </Drawer>
+
         </Box>
     )
 }

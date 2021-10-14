@@ -25,12 +25,6 @@ function App() {
             <LoginSignUp isLogin={false}/>
           </Route>
 
-          <Route path='/events'>
-            <PageTemplate>
-              <Events />
-            </PageTemplate>
-          </Route>
-
           <Route path='/dashboard'>
             <PageTemplate>
               <Dashboard />
