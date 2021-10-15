@@ -14,7 +14,7 @@ function Header() {
     }
 
     return (
-        <Flex bg='white' p={4} borderBottomRadius={20} >
+        <Flex bg='white' p={4} borderBottomRadius={20} boxShadow='lg' >
             <Box>
                 <Heading onClick={() => redirect('')} cursor='pointer'>
                     Simple Events

@@ -1,12 +1,12 @@
 import React, { useEffect, useReducer } from 'react'
 import { get_events } from '../../utils/FetchFunctions'
 import EventCard from '../../components/Cards/EventCard'
-import { Grid } from '@chakra-ui/react'
+import { Grid, GridItem, Box } from '@chakra-ui/react'
 
 function AllEvents() {
 
     const [ events, setEvents ] = useReducer(reducer, initialState)
-    console.log(events)
+
     useEffect(() => {
         get_events()
         .then(json => {
@@ -16,15 +16,21 @@ function AllEvents() {
     },[])
 
     return (
-        <div>
-            <Grid templateColumns='repeat(5,1fr)' gap={2} >
+        <Box m={3}>
+            <Grid templateColumns='repeat(6,1fr)' gap={3} >
             {
                 events.map((event, key) => (
-                    <EventCard key={key} info={event} />
+
+                    <GridItem key={key} colSpan={{base:3, md:2, lg:1}} >
+                    
+                        <EventCard info={event} />
+                    
+                    </GridItem>
+
                 ))
             }
             </Grid>
-        </div>
+        </Box>
     )
 }
 

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box, Heading, Text, Image } from '@chakra-ui/react'
+import { Box, Heading, Text, Image, Flex, Spacer } from '@chakra-ui/react'
 import { FormatDate } from '../../utils/UtilitiesFunctions'
 
 function EventCard({ info }) {
@@ -32,13 +32,17 @@ function EventCard({ info }) {
                     { info.name }
                 </Heading>
 
-                <Text fontSize='md'>
-                    { date }
-                </Text>
+                <Flex direction='row'>
+                    <Text fontSize='md'>
+                        { date }
+                    </Text>
 
-                <Text fontSize='md'>
-                    { time }
-                </Text>
+                    <Spacer />
+
+                    <Text fontSize='md'>
+                        { time }
+                    </Text>
+                </Flex>
 
                 {/* <Text>{ info.location }</Text> */}
             
