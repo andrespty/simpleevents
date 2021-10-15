@@ -140,3 +140,6 @@ STRIPE_SECRET_KEY =  os.getenv('STRIPE_SECRET_KEY')
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+REST_FRAMEWORK = {
+    'DATETIME_FORMAT': "%m/%d/%Y %H:%M ",
+}

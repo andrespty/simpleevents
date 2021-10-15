@@ -1,7 +1,10 @@
 import React from 'react'
 import { Box, Heading, Text, Image } from '@chakra-ui/react'
+import { FormatDate } from '../../utils/UtilitiesFunctions'
 
 function EventCard({ info }) {
+
+    const {date, time} = FormatDate(info.date)
 
     return (
         <Box 
@@ -30,8 +33,13 @@ function EventCard({ info }) {
                 </Heading>
 
                 <Text fontSize='md'>
-                    { info.date }
+                    { date }
                 </Text>
+
+                <Text fontSize='md'>
+                    { time }
+                </Text>
+
                 {/* <Text>{ info.location }</Text> */}
             
             </Box>
