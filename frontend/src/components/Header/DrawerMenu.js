@@ -8,6 +8,11 @@ function DrawerMenu({ redirect }) {
 
     const { isOpen, onOpen, onClose } = useDisclosure()
 
+    const close_drawer = (e) => {
+        redirect(e)
+        onClose()
+    }
+
     return (
         <Box>
 
@@ -20,6 +25,7 @@ function DrawerMenu({ redirect }) {
             <Drawer
                 isOpen={isOpen}
                 onClose={onClose}
+                autoFocus={false}
             >
                 <DrawerOverlay />
                 <DrawerContent>
@@ -30,7 +36,7 @@ function DrawerMenu({ redirect }) {
                     >
 
                         <Spacer/>
-                        <NavBar direction='column' redirect={redirect} />   
+                        <NavBar direction='column' redirect={close_drawer} />   
 
                     </DrawerBody>
 

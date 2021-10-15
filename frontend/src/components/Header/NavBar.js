@@ -1,7 +1,8 @@
 import React, { useContext } from 'react'
-import { ButtonGroup, Button, Box, Stack, Text } from '@chakra-ui/react'
+import {  Button, Box, Stack } from '@chakra-ui/react'
 import { useLocation } from 'react-router'
 import { UserContext } from '../../App'
+import './NavBar.css'
 
 function NavBar({ redirect, direction='horizontal' }) {
 
@@ -20,12 +21,12 @@ function NavBar({ redirect, direction='horizontal' }) {
 
     if (user.isLoggedIn){
         return(
-            <LoggedInNavBar redirect={redirect} isActive={isActive} />
+            <LoggedInNavBar redirect={redirect} isActive={isActive} direction={direction} />
         )
     }
     else{
         return(
-            <GuestNavBar redirect={redirect} isActive={isActive} />
+            <GuestNavBar redirect={redirect} isActive={isActive} direction={direction} />
         )
     }
 }
@@ -66,21 +67,6 @@ const NavButton = ({ onClick, children, ...props}) => {
             {children}
         </Button>
     )
-
-    // return(
-    //     <Box 
-    //         p={3} 
-    //         borderRadius={5}
-    //         _hover={{bg:'blue.100'}} 
-    //         style={{transition:'0.3s'}} 
-    //         onClick={onClick}
-    //         cursor='pointer'
-    //     >
-    //         <Text fontSize='lg' {...props} >
-    //             {children}
-    //         </Text>
-    //     </Box>
-    // )
 }
 
 

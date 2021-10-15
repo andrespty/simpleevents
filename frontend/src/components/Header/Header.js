@@ -1,20 +1,29 @@
-import React from 'react'
-import { Heading, Flex, Box, Spacer, IconButton } from "@chakra-ui/react"
+import React, { useState, useEffect } from 'react'
+import { Heading, Flex, Box, Spacer, IconButton, keyframes, usePrefersReducedMotion } from "@chakra-ui/react"
 import { useHistory } from 'react-router'
 import { HamburgerIcon } from '@chakra-ui/icons'
 import NavBar from './NavBar'
 import DrawerMenu from './DrawerMenu'
+import useStickyEffect from './useStickyEffect'
+import './NavBar.css'
 
 function Header() {
 
     let history = useHistory()
-
-    const redirect = (page) => {
+    const redirect = (page, other) => {
         history.push(`${page}`)
     }
+    const { isSticky, element } = useStickyEffect()
 
     return (
-        <Flex bg='white' p={4} borderBottomRadius={20} boxShadow='lg' >
+        <Flex 
+            bg='white' 
+            borderBottomRadius={20} 
+            p={4}
+            boxShadow='lg' 
+            ref={element} 
+            className={ isSticky ? 'navbar navbar-sticky' : 'navbar'}
+        >
             <Box>
                 <Heading onClick={() => redirect('')} cursor='pointer'>
                     Simple Events
@@ -34,4 +43,8 @@ function Header() {
     )
 }
 
+const moveDown = keyframes(`
+from { transform: translateY(-5rem); }
+to { transform: translateY(0rem); }
+`)
 export default Header
