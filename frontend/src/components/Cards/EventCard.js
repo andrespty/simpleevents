@@ -3,13 +3,39 @@ import { Box, Heading, Text, Image } from '@chakra-ui/react'
 
 function EventCard({ info }) {
 
-    console.log(info)
-
     return (
-        <Box>
-            <Image src={info.poster} borderRadius={10} boxSize={150} />
-            <Heading as='h3' size='lg'>{ info.name }</Heading>
-            <Text>{ info.date }</Text>
+        <Box 
+            bg='white'
+            borderRadius={5}
+            style={{
+                transition:'0.3s'
+            }}
+            _hover={{
+                transform: 'scale(1.02)',
+                boxShadow:'lg'
+            }}
+            cursor='pointer'
+            boxShadow={'md'}
+        >
+            <Image 
+                src={info.poster} 
+                borderTopRadius={5} 
+                objectFit={'cover'}     
+            />
+            
+            <Box p={3}>
+
+                <Heading as='h4' size='md'>
+                    { info.name }
+                </Heading>
+
+                <Text fontSize='md'>
+                    { info.date }
+                </Text>
+                {/* <Text>{ info.location }</Text> */}
+            
+            </Box>
+
         </Box>
     )
 }

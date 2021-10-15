@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { Box } from '@chakra-ui/react'
+import AllEvents from './All_Events'
 
 function Home() {
+
     return (
         <Box>
-            Home
-            welcome Home
+            <AllEvents />
         </Box>
     )
 }
