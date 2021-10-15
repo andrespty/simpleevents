@@ -18,11 +18,15 @@ function App() {
         <Switch>
         
           <Route path='/login'>
-            <LoginSignUp isLogin={true}/>
+            <PageTemplate>
+              <LoginSignUp isLogin={true}/>
+            </PageTemplate>
           </Route>
 
           <Route path='/signup'>
-            <LoginSignUp isLogin={false}/>
+            <PageTemplate>
+              <LoginSignUp isLogin={false}/>
+            </PageTemplate>
           </Route>
 
           <Route path='/dashboard'>

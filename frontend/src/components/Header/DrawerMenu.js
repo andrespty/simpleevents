@@ -24,20 +24,18 @@ function DrawerMenu({ redirect }) {
                 <DrawerOverlay />
                 <DrawerContent>
 
-                    <DrawerHeader>
-                        Simple Events
-                    </DrawerHeader>
-                
-                    <Spacer/>
+                    <DrawerBody 
+                        d='flex' 
+                        flexDirection='column'
+                    >
 
-                    <DrawerBody>
-
+                        <Spacer/>
                         <NavBar direction='column' redirect={redirect} />   
 
                     </DrawerBody>
 
                     <DrawerFooter>
-                        Hello
+
                     </DrawerFooter>
 
                 </DrawerContent>
