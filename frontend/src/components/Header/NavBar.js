@@ -1,9 +1,11 @@
-import React, { useEffect } from 'react'
+import React, { useContext } from 'react'
 import { ButtonGroup, Button, Box, Stack, Text } from '@chakra-ui/react'
 import { useLocation } from 'react-router'
-import { check_token } from '../../utils/FetchFunctions'
+import { UserContext } from '../../App'
 
 function NavBar({ redirect, direction='horizontal' }) {
+
+    const { user } = useContext(UserContext)
 
     let location = useLocation()
 
@@ -16,36 +18,21 @@ function NavBar({ redirect, direction='horizontal' }) {
         }
     }
 
-    useEffect(() => {
-        if (localStorage.getItem('refresh')){
-            check_token()
-            .then(json => {
-                if (json.access){
-                    console.log('Has access')
-                }
-                else{
-                    console.log('No access')
-                }
-            })
-        }
-    }, [])
-
-    return (
-        <Box w='100%'>
-            <Stack spacing={15} direction={direction}>
-                <NavButton onClick={() => redirect('/')} variant={isActive('/')}>Home</NavButton>
-                <NavButton onClick={() => redirect('/whyus')} variant={isActive('/whyus')}>Why Us?</NavButton>
-                <NavButton onClick={() => redirect('/contact')} variant={isActive('/contact')}>Help</NavButton>
-                <NavButton onClick={() => redirect('/signup')} variant={isActive('/create')}>Create Event</NavButton>
-                <NavButton onClick={() => redirect('/login')} variant={'outline'} colorScheme={'primary'} >Log In</NavButton>
-            </Stack>
-        </Box>
-    )
+    if (user.isLoggedIn){
+        return(
+            <LoggedInNavBar redirect={redirect} isActive={isActive} />
+        )
+    }
+    else{
+        return(
+            <GuestNavBar redirect={redirect} isActive={isActive} />
+        )
+    }
 }
 
 export default NavBar
 
-const SignedUpNavBar = ({ redirect, direction='horizontal', isActive }) => {
+const LoggedInNavBar = ({ redirect, direction='horizontal', isActive }) => {
     return(
         <Box>
             <Stack spacing={15} direction={direction}>
