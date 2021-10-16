@@ -39,3 +39,10 @@ export const FormatDate = (string) => {
 
     return {date, time}
 }
+
+export const join_date_time = (date, time) => {
+    let newDate = date.toLocaleDateString()
+    let newTime = time.toLocaleTimeString()
+    let bar = new Date(`${newDate} ${newTime}`)
+    return bar.toISOString()
+}
