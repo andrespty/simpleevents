@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react'
-import { Heading, Flex, Box, Spacer, IconButton, keyframes, usePrefersReducedMotion } from "@chakra-ui/react"
+import React from 'react'
+import { Heading, Flex, Box, Spacer } from "@chakra-ui/react"
 import { useHistory } from 'react-router'
-import { HamburgerIcon } from '@chakra-ui/icons'
 import NavBar from './NavBar'
 import DrawerMenu from './DrawerMenu'
 import useStickyEffect from './useStickyEffect'
@@ -43,8 +42,4 @@ function Header() {
     )
 }
 
-const moveDown = keyframes(`
-from { transform: translateY(-5rem); }
-to { transform: translateY(0rem); }
-`)
 export default Header

@@ -1,6 +1,6 @@
 import React from 'react'
-import { Drawer, DrawerBody, DrawerFooter, DrawerHeader, DrawerOverlay, DrawerContent, DrawerCloseButton, 
-    Box, IconButton, useDisclosure, Flex, Spacer } from "@chakra-ui/react"
+import { Drawer, DrawerBody, DrawerFooter, DrawerOverlay, DrawerContent, 
+    Box, IconButton, useDisclosure, Spacer } from "@chakra-ui/react"
 import { HamburgerIcon } from '@chakra-ui/icons'
 import NavBar from './NavBar'
 

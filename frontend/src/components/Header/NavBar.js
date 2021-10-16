@@ -2,6 +2,7 @@ import React, { useContext } from 'react'
 import {  Button, Box, Stack } from '@chakra-ui/react'
 import { useLocation } from 'react-router'
 import { UserContext } from '../../App'
+import UserDropDown from '../User_Menu/UserDropDown'
 import './NavBar.css'
 
 function NavBar({ redirect, direction='horizontal' }) {
@@ -21,7 +22,7 @@ function NavBar({ redirect, direction='horizontal' }) {
 
     if (user.isLoggedIn){
         return(
-            <LoggedInNavBar redirect={redirect} isActive={isActive} direction={direction} />
+            <LoggedInNavBar redirect={redirect} isActive={isActive} direction={direction} user={user} />
         )
     }
     else{
@@ -33,14 +34,14 @@ function NavBar({ redirect, direction='horizontal' }) {
 
 export default NavBar
 
-const LoggedInNavBar = ({ redirect, direction='horizontal', isActive }) => {
+const LoggedInNavBar = ({ redirect, direction='horizontal', isActive, user }) => {
     return(
         <Box>
             <Stack spacing={15} direction={direction}>
                 <NavButton onClick={() => redirect('/')} variant={isActive('/')}>Home</NavButton>
                 <NavButton onClick={() => redirect('/dashboard')} variant={isActive('/dashboard')}>Dashboard</NavButton>
                 <NavButton onClick={() => redirect('/create')} variant={isActive('/create')}>Create Event</NavButton>
-                <NavButton onClick={() => console.log('User')} variant='navbar_deactive'>User</NavButton>
+                <UserDropDown onClick={() => console.log('User')} variant='navbar_deactive'>{ `${user.first_name} ${user.last_name}` }</UserDropDown>
             </Stack>
         </Box>
     )
