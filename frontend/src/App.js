@@ -6,6 +6,7 @@ import PageTemplate from "./utils/PageTemplates";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import WhyUs from "./pages/Why_Us/WhyUs";
 import useUser from "./useUser";
+import CreateEvent from "./pages/Create_Event/CreateEvent";
 
 export const url = 'http://127.0.0.1:8000'
 
@@ -36,6 +37,12 @@ function App() {
             </PageTemplate>
           </Route>
 
+          <Route path='/create'>
+            <PageTemplate>
+              <CreateEvent />
+            </PageTemplate>
+          </Route>
+
           <Route path='/whyus'>
             <PageTemplate>
               <WhyUs />
@@ -50,7 +57,6 @@ function App() {
 
         </Switch>
       </Router>
-      <button onClick={() => console.log(user)}>click</button>
     </UserContext.Provider>
   );
 }

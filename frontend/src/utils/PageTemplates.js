@@ -7,7 +7,7 @@ function PageTemplate({ children }) {
     return (
         <Box>
             <Header />
-            <Box pt={20}> {/* Should fix this */}
+            <Box pt={24} px={3} > {/* Should fix this */}
                 {children}
             </Box>
         </Box>

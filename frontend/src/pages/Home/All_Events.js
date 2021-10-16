@@ -16,7 +16,7 @@ function AllEvents() {
     },[])
 
     return (
-        <Box m={3}>
+        <Box>
             <Grid templateColumns='repeat(6,1fr)' gap={3} >
             {
                 events.map((event, key) => (

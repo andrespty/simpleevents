@@ -1,22 +1,18 @@
 import React from 'react'
 import { Box, Heading } from '@chakra-ui/react'
-import AllEvents from './All_Events'
+import CreateEventForm from './CreateEventForm'
 
-function Home() {
-
+function CreateEvent() {
     return (
         <Box>
-
             <Heading>
-                Events
+                Create Event
             </Heading>
-            
-            <AllEvents />
-            
+
+            <CreateEventForm />
+
         </Box>
     )
 }
 
-export default Home
-
-  
+export default CreateEvent
