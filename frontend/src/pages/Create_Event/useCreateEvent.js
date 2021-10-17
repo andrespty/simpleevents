@@ -12,17 +12,19 @@ const useCreateEvent = () => {
         let date = join_date_time(info.date, info.time)
         let form_data = new FormData()
 
-        form_data.append('creator', 1)
-        form_data.append('name', info.name)
-        form_data.append('date', date)
-        form_data.append('poster', info.poster)
+        console.log(info)
+
+        // form_data.append('creator', 1)
+        // form_data.append('name', info.name)
+        // form_data.append('date', date)
+        // form_data.append('poster', info.poster)
         
-        create_event(form_data)
-        .then( json =>{
-            setInfo({isLoading:false})
-            console.log(json)
-        })
-        
+        // create_event(form_data)
+        // .then( json =>{
+            //     setInfo({isLoading:false})
+            //     console.log(json)
+            // })
+        setInfo({isLoading:false})
     }
 
     return { info, setInfo, submit }
@@ -35,7 +37,8 @@ const initialInfo = {
     poster:'',
     date: new Date(),
     time: new Date(),
-    isLoading: false
+    isLoading: false,
+    hasEndDate: false
 }
 
 const reducer = (state, action) => {
