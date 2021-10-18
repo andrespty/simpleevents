@@ -1,4 +1,5 @@
 import { url } from "../App";
+import axios from "axios";
 
 export async function get_events(){
     const response = await fetch(`${url}/api/filterEvents/`)
@@ -28,4 +29,10 @@ export async function check_token(){
     //     }
 
     return await response.json()
+}
+
+export async function get_event(eventID){
+    const response = axios.get(`${url}/api/event/${eventID}/`)
+
+    return await response
 }

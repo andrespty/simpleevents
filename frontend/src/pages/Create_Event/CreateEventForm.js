@@ -1,12 +1,11 @@
 import React from 'react'
-import { Input, Box, Button, FormControl, FormLabel, Stack, Checkbox, Collapse, useDisclosure  } from '@chakra-ui/react'
+import { Input, Box, Button, FormControl, FormLabel, Stack, Checkbox, Collapse } from '@chakra-ui/react'
 import useCreateEvent from './useCreateEvent'
 import DatePickerForm from '../../components/Date_Picker/DatePickerForm'
 
 function CreateEventForm() {
 
     const { info, setInfo, submit } = useCreateEvent()
-    const { isOpen, onOpen, onClose } = useDisclosure()
 
     return (
         <Box p={5}>

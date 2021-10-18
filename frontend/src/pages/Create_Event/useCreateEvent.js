@@ -1,11 +1,12 @@
 import { useReducer } from "react"
 import { join_date_time } from "../../utils/UtilitiesFunctions"
 import { create_event } from "../../utils/CreateFunctions"
+import { useHistory, useRouteMatch } from "react-router"
 
 const useCreateEvent = () => {
     const [ info, setInfo ] = useReducer(reducer, initialInfo)
-
-    
+    let history = useHistory()
+    let match = useRouteMatch()
     const submit = (e) => {
         e.preventDefault()
         setInfo({isLoading:true})
@@ -14,17 +15,17 @@ const useCreateEvent = () => {
 
         console.log(info)
 
-        // form_data.append('creator', 1)
-        // form_data.append('name', info.name)
-        // form_data.append('date', date)
-        // form_data.append('poster', info.poster)
+        form_data.append('creator', 1)
+        form_data.append('name', info.name)
+        form_data.append('date', date)
+        form_data.append('poster', info.poster)
         
-        // create_event(form_data)
-        // .then( json =>{
-            //     setInfo({isLoading:false})
-            //     console.log(json)
-            // })
-        setInfo({isLoading:false})
+        create_event(form_data)
+        .then( json =>{
+                setInfo({isLoading:false})
+                console.log(json.id)
+                history.push(`${match.url}/${json.id}`)
+        })
     }
 
     return { info, setInfo, submit }

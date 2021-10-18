@@ -21,7 +21,7 @@ class Event_Simple_Serializer(serializers.ModelSerializer):
 
     class Meta:
         model = Event
-        fields = ['name', 'date', 'poster']
+        fields = ['id','name', 'date', 'poster']
 
 class Ticket_Simple_Serializer(serializers.ModelSerializer):
     class Meta:
@@ -36,5 +36,5 @@ class Event_Full_Serializer(serializers.ModelSerializer):
 
     class Meta:
         model = Event
-        fields = ['creator', 'name', 'date', 'participants', 'tickets', 'poster']
+        fields = ['id','creator', 'name', 'date', 'participants', 'tickets', 'poster']
 
