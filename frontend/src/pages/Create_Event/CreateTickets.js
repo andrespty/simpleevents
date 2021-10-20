@@ -7,6 +7,8 @@ function CreateTickets() {
     let { eventID } = useParams()
     const { ticketList, submit, add_ticket, setTicketList } = useCreateTickets(eventID)
 
+    console.log(ticketList)
+
     return (
         <Box>
             <form onSubmit={submit} >
@@ -28,7 +30,7 @@ function CreateTickets() {
 
 export default CreateTickets
 
-const TicketField = React.memo(({ticket, setTicketList}) => {
+const TicketField = ({ticket, setTicketList}) => {
 
     console.log(ticket)
     const remove = (id) => {
@@ -42,6 +44,7 @@ const TicketField = React.memo(({ticket, setTicketList}) => {
                 <Input 
                     value={ticket.name}
                     onChange={(e) => setTicketList({type:'modify', id:ticket.id, value:e.target.value, att:'name'})}
+                    
                 />
             </Field>
 
@@ -57,7 +60,7 @@ const TicketField = React.memo(({ticket, setTicketList}) => {
 
         </Stack>
     )
-})
+}
 
 const Field = ({ label, placeholder, error, isInvalid, children, isRequired, ...props }) => {
     return(
