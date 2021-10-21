@@ -35,6 +35,9 @@ class Ticket(models.Model):
     event           = models.ForeignKey(Event, on_delete=models.CASCADE, related_name='tickets')
     name            = models.CharField(max_length=15)
     price           = models.DecimalField(verbose_name='price', decimal_places=2, max_digits=6)
+    amount          = models.IntegerField(verbose_name='amount', default=100)
+    description     = models.CharField(max_length=100, default='', blank=True, null=True)
+    isAvailable     = models.BooleanField(verbose_name='is_available', default=True)
 
     def __str__(self):
         return f'{self.name} - {self.event.name}'
