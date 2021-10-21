@@ -12,6 +12,7 @@ from rest_framework.pagination import PageNumberPagination
 from rest_framework.views import APIView
 from rest_framework_simplejwt.views import TokenObtainPairView
 from datetime import datetime
+import io
 
 class ParticipantView(viewsets.ModelViewSet):
     serializer_class = ParticipantSerializer
@@ -43,3 +44,22 @@ class Model_Participant_View(viewsets.ModelViewSet):
 class Model_Ticket_View(viewsets.ModelViewSet):
     serializer_class = Model_Ticket_Serializer
     queryset = Ticket.objects.all()
+
+@api_view(['POST'])
+def Create_Tickets(request):
+    tickets = json.loads(request.body)
+    messages = []
+    for ticket in tickets:
+        del ticket['id']
+
+        serializer = Model_Ticket_Serializer(data=ticket)
+        if serializer.is_valid():
+            message = serializer.save()
+            print(message)
+            messages.append(ticket)
+        else:
+            print('Is not valid')
+            print(serializer.errors)
+
+    print(messages)
+    return Response({'messages':messages})

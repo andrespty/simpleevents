@@ -23,29 +23,14 @@ const useCreateTickets = (eventID) => {
     }
         
     const submit = () => {
-        let forms = []
-
         ticketList.forEach((ticket) => {
-            console.log(ticket)
-            let form_data = new FormData()
-
-            form_data.append('name', ticket.name)
-            form_data.append('event', eventID)
-            form_data.append('price', ticket.price)
-            form_data.append('description', ticket.description)
-            form_data.append('amount', ticket.amount)
-            form_data.append('isAvailable', ticket.isAvailable)
-            forms.push(form_data)
-            // create_ticket(form_data)
-            // .then(json => {
-            //     console.log(json)
-            // })
-            // .catch(err => console.log(err))
+            ticket.event = eventID
         })
 
-        // console.log(id)
-        // console.log(ticketNumber)
-        // console.log(ticketList)
+        create_ticket(ticketList)
+        .then(json=>{
+            console.log(json)
+        })
     }
 
     return { ticketList, setTicketList, submit, add_ticket, isSubmitted }
