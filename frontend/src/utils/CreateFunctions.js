@@ -13,9 +13,10 @@ export async function create_event(body){
 }
 
 export async function create_ticket(body){
-    const response = await axios.post(`${url}/api/tickets/create/`, body, {
+    // const response = await axios.post(`${url}/api/tickets/create/`, body, {
+    const response = await axios.post(`${url}/api/models/ticket/`, body, {
         headers:{
-            'Content-Type': 'multipart/form-data'
+            'Content-Type': 'application/json'
         }
     })
 

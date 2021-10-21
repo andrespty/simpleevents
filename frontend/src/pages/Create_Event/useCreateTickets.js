@@ -26,11 +26,12 @@ const useCreateTickets = (eventID) => {
         ticketList.forEach((ticket) => {
             ticket.event = eventID
         })
-
+        console.log(ticketList)
         create_ticket(ticketList)
         .then(json=>{
             console.log(json)
         })
+        .catch(err => console.log(err))
     }
 
     return { ticketList, setTicketList, submit, add_ticket, isSubmitted }

@@ -45,21 +45,10 @@ class Model_Ticket_View(viewsets.ModelViewSet):
     serializer_class = Model_Ticket_Serializer
     queryset = Ticket.objects.all()
 
-@api_view(['POST'])
-def Create_Tickets(request):
-    tickets = json.loads(request.body)
-    messages = []
-    for ticket in tickets:
-        del ticket['id']
-
-        serializer = Model_Ticket_Serializer(data=ticket)
-        if serializer.is_valid():
-            message = serializer.save()
-            print(message)
-            messages.append(ticket)
-        else:
-            print('Is not valid')
-            print(serializer.errors)
-
-    print(messages)
-    return Response({'messages':messages})
+    # Create multiple instances when given a list of objects
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data, many=isinstance(request.data,list))
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+        headers = self.get_success_headers(serializer.data)
+        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)

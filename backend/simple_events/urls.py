@@ -25,8 +25,6 @@ urlpatterns = [
     path('token/', MyTokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 
-    path('tickets/create/', views.Create_Tickets),
-
     path('test/payment/', stripe_views.test_payment)
 
 ]
