@@ -10,8 +10,6 @@ function CreateTickets() {
     let { eventID } = useParams()
     const { ticketList, submit, add_ticket, setTicketList, isSubmitted } = useCreateTickets(eventID)
 
-    console.log(ticketList)
-
     return (
         <Box>
             <form onSubmit={submit} >
@@ -25,7 +23,7 @@ function CreateTickets() {
                     <ButtonGroup>
                         <Button onClick={add_ticket} leftIcon={<AddIcon />} >Add ticket</Button>
 
-                        <Button onClick={submit} colorScheme='primary' isLoading={isSubmitted} >Save tickets</Button>
+                        <Button type='submit' colorScheme='primary' isLoading={isSubmitted} >Save tickets</Button>
                     </ButtonGroup>
 
                 </Flex>

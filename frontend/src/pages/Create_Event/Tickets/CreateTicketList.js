@@ -1,8 +1,8 @@
 import React from 'react'
 import { CloseIcon } from '@chakra-ui/icons'
 import { Input, Box, Stack, Divider, Center, IconButton, Checkbox } from '@chakra-ui/react'
-import InputNumber from '../../components/Inputs/InputNumber'
-import InputField from '../../components/Inputs/InputField'
+import InputNumber from '../../../components/Inputs/InputNumber'
+import InputField from '../../../components/Inputs/InputField'
 
 function CreateTicketList({ ticketList, setTicketList }) {
     return (

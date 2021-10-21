@@ -2,7 +2,8 @@ import React from 'react'
 import { Box, Heading } from '@chakra-ui/react'
 import CreateEventForm from './CreateEventForm'
 import { Switch, Route, useRouteMatch } from 'react-router'
-import CreateTickets from './CreateTickets'
+import CreateTickets from './Tickets/CreateTickets'
+import EventDetails from './Details/EventDetails'
 
 function CreateEvent() {
 
@@ -16,8 +17,8 @@ function CreateEvent() {
 
             <Switch>
 
-                <Route path={`${match.path}/:eventID/`} >
-                    <CreateTickets />
+                <Route path={`${match.path}/:eventID`} >
+                    <CreateEventDetails />
                 </Route>
 
                 <Route path={`${match.path}/`}>
@@ -31,3 +32,23 @@ function CreateEvent() {
 }
 
 export default CreateEvent
+
+const CreateEventDetails = () => {
+
+    let match = useRouteMatch()
+    console.log(match.path)
+
+    return(
+        <Switch>
+
+            <Route exact path={`${match.path}/details/`}>
+                <EventDetails />
+            </Route>  
+
+            <Route path={`${match.path}`}>
+                <CreateTickets/> 
+            </Route>
+
+        </Switch>
+    )
+}

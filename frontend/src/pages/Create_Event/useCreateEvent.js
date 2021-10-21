@@ -24,7 +24,7 @@ const useCreateEvent = () => {
         .then( json =>{
                 setInfo({isLoading:false})
                 console.log(json.id)
-                history.push(`${match.url}/${json.id}`)
+                history.push(`${match.url}/details/`)
         })
     }
 
