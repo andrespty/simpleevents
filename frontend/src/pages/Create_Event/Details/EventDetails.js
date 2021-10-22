@@ -1,11 +1,16 @@
 import React from 'react'
-
+import { useParams } from 'react-router'
+import { Box, Button, Flex, Spacer, ButtonGroup } from '@chakra-ui/react'
+import useEventDetails from './useEventDetails'
 function EventDetails() {
-    console.log('Details')
+    
+    let { eventID } = useParams()
+    useEventDetails(eventID)
+
     return (
-        <div>
+        <Box>
             details
-        </div>
+        </Box>
     )
 }
 

@@ -36,7 +36,6 @@ export default CreateEvent
 const CreateEventDetails = () => {
 
     let match = useRouteMatch()
-    console.log(match.path)
 
     return(
         <Switch>
