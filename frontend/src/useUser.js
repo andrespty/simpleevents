@@ -13,6 +13,9 @@ const useUser = () => {
                     let user = JSON.parse(window.atob(json['access'].split('.')[1]))
                     setUser({type:'loginSignup', ...user})
                 }
+                else{
+                    setUser({type:'logout'})
+                }
             })
         }
     },[])
@@ -46,8 +49,9 @@ switch(action.type){
     }
     
     case 'logout':
-    localStorage.removeItem('refresh')
-    localStorage.removeItem('access')
+        console.log('Loggin Out')
+        localStorage.removeItem('refresh')
+        localStorage.removeItem('access')
     return initialUser
 
     default:

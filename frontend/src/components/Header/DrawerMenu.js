@@ -7,6 +7,7 @@ import NavBar from './NavBar'
 function DrawerMenu({ redirect }) {
 
     const { isOpen, onOpen, onClose } = useDisclosure()
+    
 
     const close_drawer = (e) => {
         redirect(e)

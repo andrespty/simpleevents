@@ -7,13 +7,14 @@ import Dashboard from "./pages/Dashboard/Dashboard";
 import WhyUs from "./pages/Why_Us/WhyUs";
 import useUser from "./useUser";
 import CreateEvent from "./pages/Create_Event/CreateEvent";
+import PrivateRoute from "./components/Private_Route/PrivateRoute";
 
 export const url = 'http://127.0.0.1:8000'
 
 function App() {
 
   const { user, setUser } = useUser()
-
+  console.log(localStorage.getItem('refresh'))
   return (
     <UserContext.Provider value={{user, setUser}}>
       <Router>
@@ -37,11 +38,17 @@ function App() {
             </PageTemplate>
           </Route>
 
-          <Route path='/create'>
+          {/* <Route path='/create'>
             <PageTemplate>
               <CreateEvent />
             </PageTemplate>
-          </Route>
+          </Route> */}
+
+          <PrivateRoute 
+            path='/create' 
+            isLoggedIn={localStorage.getItem('refresh')} 
+            component={CreateEvent} 
+          />
 
           <Route path='/whyus'>
             <PageTemplate>

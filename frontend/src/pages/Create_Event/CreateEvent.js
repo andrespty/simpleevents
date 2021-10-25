@@ -4,12 +4,14 @@ import CreateEventForm from './CreateEventForm'
 import { Switch, Route, useRouteMatch } from 'react-router'
 import CreateTickets from './Tickets/CreateTickets'
 import EventDetails from './Details/EventDetails'
+import PageTemplate from '../../utils/PageTemplates'
 
 function CreateEvent() {
 
     let match = useRouteMatch()
 
     return (
+        <PageTemplate>
         <Box>
             <Heading>
                 Create Event
@@ -28,6 +30,7 @@ function CreateEvent() {
             </Switch>
 
         </Box>
+        </PageTemplate>
     )
 }
 
