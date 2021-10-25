@@ -53,14 +53,14 @@ const useLoginSignup = (isLogin) => {
                 else{
                     if ( isLogin ){
                         let user = JSON.parse(window.atob(json['access'].split('.')[1]))
-                        setUser({type:'loginSignup', ...user})
                         localStorage.setItem('access', json.access)
                         localStorage.setItem('refresh', json.refresh)
+                        setUser({type:'loginSignup', ...user})
                     }
                     else{
-                        setUser({type:'loginSignup', ...json})
                         localStorage.setItem('access', json.token.access)
                         localStorage.setItem('refresh', json.token.refresh)
+                        setUser({type:'loginSignup', ...json})
                     }
                     setError()
                 }

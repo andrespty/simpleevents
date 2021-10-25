@@ -10,7 +10,6 @@ function AllEvents() {
     useEffect(() => {
         get_events()
         .then(json => {
-            console.log(json)
             setEvents(json)
         })
     },[])
