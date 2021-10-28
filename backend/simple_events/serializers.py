@@ -3,6 +3,7 @@ from .models import *
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 import json
 from .token import *
+from .create_serializers import *
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -32,7 +33,7 @@ class Event_Full_Serializer(serializers.ModelSerializer):
 
     participants = ParticipantSerializer(many=True)
     creator      = UserSerializer()
-    tickets      = Ticket_Simple_Serializer(many=True)
+    tickets      = Model_Ticket_Serializer(many=True)
 
     class Meta:
         model = Event

@@ -4,11 +4,11 @@ import { create_ticket } from "../../../utils/CreateFunctions"
 import { useHistory, useRouteMatch } from "react-router"
 
 const useCreateTickets = (eventID, userID) => {
-    console.log(userID)
+
     const [ ticketList, setTicketList ] = useReducer(reducer, initialInfo)
-    const [ id, setId ] = useState(0)
     const [ ticketNumber, setTicketNumber ] = useState(1)
     const [ isSubmitted, setIsSubmitted ] = useState(false)
+    const [ ticketState, setTicketState ] = useState(initialState)
     
     let history = useHistory() 
     let match = useRouteMatch()   
@@ -16,21 +16,29 @@ const useCreateTickets = (eventID, userID) => {
     useEffect(() => {
         get_event(eventID)
         .then(json => {
-            console.log(json.data.creator.id)
-            console.log(json.data.creator.id !== userID)
+
             if (json.data.creator.id !== userID){
                 history.push('/')
             }
             else{
                 console.log(json.data)
-                setId(json.data.id)
+                if ( json.data.tickets.length > 0){
+                    let loadTickets = json.data.tickets
+                    loadTickets.forEach((ticket, index) => {
+                        ticket.ticket_id = index + 1
+                    })
+                    console.log(loadTickets)
+                    setTicketState(state => ({...state, hasTickets:true}))
+                    setTicketList({type:'load', value:loadTickets})
+                }
             }
             
         })
+        .catch(err => console.log(err))
     },[])
 
     const add_ticket = () => {
-        setTicketList({type:'add', id:ticketNumber + 1})
+        setTicketList({type:'add', ticket_id:ticketNumber + 1})
         setTicketNumber(state => state + 1)
     }
         
@@ -54,9 +62,13 @@ const useCreateTickets = (eventID, userID) => {
 
 export default useCreateTickets
 
+const initialState = {
+    hasTickets: false
+}
+
 const initialInfo = [
     {
-        id: 1,
+        ticket_id: 1,
         name:'',
         price:0,
         description:'',
@@ -72,7 +84,7 @@ const reducer = (state, action) => {
             return [
                 ...state,
                 {
-                    id: action.id,
+                    ticket_id: action.ticket_id,
                     name:'',
                     price:0,
                     description:'',
@@ -82,17 +94,20 @@ const reducer = (state, action) => {
             ]
 
         case 'remove':
-            var newState = state.filter(ticket => ticket.id !== action.id)
+            var newState = state.filter(ticket => ticket.ticket_id !== action.id)
             return [
                 ...newState
             ]
 
         case 'modify':
-            let object = state.filter(ticket => ticket.id === action.id)[0]
+            let object = state.filter(ticket => ticket.ticket_id === action.id)[0]
             object[action.att] = action.value
             return [
                 ...state,
             ]
+        
+        case 'load':
+            return action.value
 
         default:
             return initialInfo

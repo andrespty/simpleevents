@@ -20,14 +20,14 @@ export default CreateTicketList
 
 const TicketField = ({ticket, setTicketList}) => {
 
-    const remove = (id) => {
-        setTicketList({type:'remove', id:id})
+    const remove = (ticket_id) => {
+        setTicketList({type:'remove', id:ticket_id})
     }
-
+    
     return(
         <>
         {
-            ticket.id === 1
+            ticket.ticket_id === 1
             ? null
             :<Center><Divider my={3} w='90%' /></Center>
         }
@@ -36,7 +36,7 @@ const TicketField = ({ticket, setTicketList}) => {
             <InputField isRequired={true} label='Ticket Name'>
                 <Input 
                     value={ticket.name}
-                    onChange={(e) => setTicketList({type:'modify', id:ticket.id, value:e.target.value, att:'name'})}
+                    onChange={(e) => setTicketList({type:'modify', id:ticket.ticket_id, value:e.target.value, att:'name'})}
                 />
             </InputField>
             
@@ -44,7 +44,7 @@ const TicketField = ({ticket, setTicketList}) => {
                 label='Price' 
                 isRequired={true} 
                 value={ticket.price}
-                onChange={(value) => setTicketList({type:'modify', id:ticket.id, value:value, att:'price'})}
+                onChange={(value) => setTicketList({type:'modify', id:ticket.ticket_id, value:value, att:'price'})}
                 precision={2}
             />
             
@@ -52,24 +52,24 @@ const TicketField = ({ticket, setTicketList}) => {
                 label='Amount Available' 
                 isRequired={true} 
                 value={ticket.amount}
-                onChange={(value) => setTicketList({type:'modify', id:ticket.id, value:value, att:'amount'})}
+                onChange={(value) => setTicketList({type:'modify', id:ticket.ticket_id, value:value, att:'amount'})}
             />
             
             {
-                ticket.id === 1
+                ticket.ticket_id === 1
                 ? null
-                :<IconButton onClick={() => remove(ticket.id)} icon={<CloseIcon/>} mt={5} />
+                :<IconButton onClick={() => remove(ticket.ticket_id)} icon={<CloseIcon/>} mt={5} />
             }
         
         </Stack>
         <InputField isRequired={false} label='Description'>
             <Input 
                 value={ticket.description}
-                onChange={(e) => setTicketList({type:'modify', id:ticket.id, value:e.target.value, att:'description'})}
+                onChange={(e) => setTicketList({type:'modify', id:ticket.ticket_id, value:e.target.value, att:'description'})}
             />
         </InputField>
         
-        <Checkbox defaultChecked value={ticket.isAvailable} onChange={(e) => setTicketList({type:'modify', id:ticket.id, value:e.target.checked, att:'isAvailable'})} >
+        <Checkbox defaultChecked value={ticket.isAvailable} onChange={(e) => setTicketList({type:'modify', id:ticket.ticket_id, value:e.target.checked, att:'isAvailable'})} >
             Make available
         </Checkbox>
         </>
