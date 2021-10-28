@@ -28,7 +28,8 @@ const initialUser = {
     first_name: '',
     last_name: '',
     email: '',
-    isLoggedIn:false
+    isLoggedIn:false,
+    isLoading: localStorage.getItem('refresh') ? true : false
   }
   
 const userReducer = (state, action) => {
@@ -40,7 +41,8 @@ switch(action.type){
         first_name: action.first_name,
         last_name: action.last_name,
         email: action.email,
-        isLoggedIn: true
+        isLoggedIn: true,
+        isLoading: false
     }
     case 'update':
     return {

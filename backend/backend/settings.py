@@ -131,7 +131,7 @@ CORS_ORIGIN_WHITELIST = [
 
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=1),
-    'REFRESH_TOKEN_LIFETIME': timedelta(minutes=2),
+    'REFRESH_TOKEN_LIFETIME': timedelta(hours=12),
     'AUTH_HEADER_TYPES': ('Bearer', 'SE'),
 }
 

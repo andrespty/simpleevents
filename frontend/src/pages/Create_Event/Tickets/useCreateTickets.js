@@ -1,21 +1,31 @@
-import { useEffect, useReducer, useState } from "react"
+import { useEffect, useReducer, useState, useContext } from "react"
 import { get_event } from "../../../utils/FetchFunctions"
 import { create_ticket } from "../../../utils/CreateFunctions"
 import { useHistory, useRouteMatch } from "react-router"
 
-const useCreateTickets = (eventID) => {
-    
+const useCreateTickets = (eventID, userID) => {
+    console.log(userID)
     const [ ticketList, setTicketList ] = useReducer(reducer, initialInfo)
     const [ id, setId ] = useState(0)
     const [ ticketNumber, setTicketNumber ] = useState(1)
     const [ isSubmitted, setIsSubmitted ] = useState(false)
+    
     let history = useHistory() 
     let match = useRouteMatch()   
 
     useEffect(() => {
         get_event(eventID)
         .then(json => {
-            setId(json.data.id)
+            console.log(json.data.creator.id)
+            console.log(json.data.creator.id !== userID)
+            if (json.data.creator.id !== userID){
+                history.push('/')
+            }
+            else{
+                console.log(json.data)
+                setId(json.data.id)
+            }
+            
         })
     },[])
 

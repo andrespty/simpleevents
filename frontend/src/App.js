@@ -14,7 +14,7 @@ export const url = 'http://127.0.0.1:8000'
 function App() {
 
   const { user, setUser } = useUser()
-  console.log(localStorage.getItem('refresh'))
+  console.log(user)
   return (
     <UserContext.Provider value={{user, setUser}}>
       <Router>
@@ -32,11 +32,11 @@ function App() {
             </PageTemplate>
           </Route>
 
-          <Route path='/dashboard'>
-            <PageTemplate>
-              <Dashboard />
-            </PageTemplate>
-          </Route>
+          <PrivateRoute 
+            path='/dashboard' 
+            isLoggedIn={localStorage.getItem('refresh')} 
+            component={Dashboard} 
+          />
 
           {/* <Route path='/create'>
             <PageTemplate>
