@@ -3,7 +3,7 @@ import { url } from "../../App"
 import { UserContext } from "../../App"
 import { useContext } from "react"
 import { CheckPasswordsAreSame, CheckPassword } from "../../utils/UtilitiesFunctions"
-import { useParams, useHistory } from 'react-router'
+import { useHistory } from 'react-router'
 
 const useLoginSignup = (isLogin) => {
     const [ info, setInfo ] = useReducer(reducer, initialState)

@@ -1,14 +1,14 @@
-import { useEffect, useReducer, useState, useContext } from "react"
+import { useEffect, useReducer, useState } from "react"
 import { get_event } from "../../../utils/FetchFunctions"
 import { create_ticket } from "../../../utils/CreateFunctions"
 import { useHistory, useRouteMatch } from "react-router"
+import { create_and_update_tickets, delete_tickets } from "../../../utils/ActionFunctions"
 
 const useCreateTickets = (eventID, userID) => {
 
-    const [ ticketList, setTicketList ] = useReducer(reducer, initialInfo)
-    const [ ticketNumber, setTicketNumber ] = useState(1)
-    const [ isSubmitted, setIsSubmitted ] = useState(false)
-    const [ ticketState, setTicketState ] = useState(initialState)
+    const [ ticketList, setTicketList ] = useReducer(reducer, initialInfo) // renders in the frontend 
+    const [ ticketNumber, setTicketNumber ] = useState(1) // for ticket creation and tracking
+    const [ ticketState, setTicketState ] = useState(initialState) // keeps track of state of ticketing
     
     let history = useHistory() 
     let match = useRouteMatch()   
@@ -17,17 +17,24 @@ const useCreateTickets = (eventID, userID) => {
         get_event(eventID)
         .then(json => {
 
+            //Checks if user is able to perform changes
             if (json.data.creator.id !== userID){
                 history.push('/')
             }
+
             else{
                 console.log(json.data)
                 if ( json.data.tickets.length > 0){
                     let loadTickets = json.data.tickets
+                    let ticketsNumber = 0
+
+                    // Adding ticket id to keep track of them in the frontend
                     loadTickets.forEach((ticket, index) => {
                         ticket.ticket_id = index + 1
+                        ticketsNumber += 1
                     })
-                    console.log(loadTickets)
+                    
+                    setTicketNumber(ticketsNumber)
                     setTicketState(state => ({...state, hasTickets:true}))
                     setTicketList({type:'load', value:loadTickets})
                 }
@@ -38,32 +45,41 @@ const useCreateTickets = (eventID, userID) => {
     },[])
 
     const add_ticket = () => {
+        setTicketState(state => ({...state, hasAddTickets:true}))
         setTicketList({type:'add', ticket_id:ticketNumber + 1})
         setTicketNumber(state => state + 1)
     }
+
+    const remove_ticket = (ticket_id) => setTicketList({type:'remove', ticket_id:ticket_id})
+
+    const modify_ticket = (ticket_id, value, att) => setTicketList({type:'modify', ticket_id:ticket_id, value:value, att:att})
+
         
     const submit = (e) => {
         e.preventDefault()
+        console.log(ticketState)
         ticketList.forEach((ticket) => {
             ticket.event = eventID
         })
-        setIsSubmitted(true)
+        setTicketState(state => ({...state, isSubmitted:true}))
         create_ticket(ticketList)
         .then(json=>{
             console.log(json)
-            setIsSubmitted(false)
+            setTicketState(state => ({...state, isSubmitted:false}))
             history.push(`${match.url}/details`)
         })
         .catch(err => console.log(err))
     }
 
-    return { ticketList, setTicketList, submit, add_ticket, isSubmitted }
+    return { ticketList, remove_ticket, modify_ticket, submit, add_ticket, isSubmitted:ticketState.isSubmitted }
 }
 
 export default useCreateTickets
 
 const initialState = {
-    hasTickets: false
+    hasTickets: false,     // Tickets already existed
+    hasAddTickets: false,  // Tickets were added (must create new tickets)
+    isSubmitted: false     // Has been submitted
 }
 
 const initialInfo = [
@@ -78,6 +94,14 @@ const initialInfo = [
 ]
 
 const reducer = (state, action) => {
+    /*
+        Action Types:
+
+        add: Adds a new ticket, requires the next ticket_id
+        remove: Removes ticket from ticketList, requires ticket_id
+        modify: Modifies a single ticket, requires ticket_id and value
+        load: if event has tickets created, this action loads the tickets into ticketList
+    */
 
     switch(action.type){
         case 'add':

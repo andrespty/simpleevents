@@ -3,14 +3,17 @@ import { get_event } from "../../../utils/FetchFunctions"
 
 const useEventDetails = (eventID) => {
     
-    const [ eventDetails, setEventDetails ] = useReducer()
+    const [ eventDetails, setEventDetails ] = useReducer(reducer, initialEventDetails)
 
     useEffect(() => {
         get_event(eventID)
         .then(json => {
             console.log(json.data)
+            setEventDetails(json.data)
         })
     },[])
+
+    console.log(eventDetails)
 
 }
 

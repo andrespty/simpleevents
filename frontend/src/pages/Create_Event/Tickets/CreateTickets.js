@@ -28,13 +28,15 @@ export default CreateTickets
 
 const CreateTicketsComponent = ({eventID, userID}) => {
     
-    const { ticketList, submit, add_ticket, setTicketList, isSubmitted } = useCreateTickets(eventID, userID)
+    const { ticketList, submit, add_ticket, isSubmitted, remove_ticket, modify_ticket } = useCreateTickets(eventID, userID)
     
     return(
         <Box>
             <form onSubmit={submit} >
 
-                <CreateTicketList ticketList={ticketList} setTicketList={setTicketList} />
+                <CreateTicketList ticketList={ticketList} 
+                    setTicketList={{remove_ticket, modify_ticket}}
+                />
 
                 <Flex  w='100%' direction='row'  >
                     
