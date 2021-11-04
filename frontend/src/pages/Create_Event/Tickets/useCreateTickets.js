@@ -51,8 +51,11 @@ const useCreateTickets = (eventID, userID) => {
     }
 
     const remove_ticket = (ticket_id) => setTicketList({type:'remove', ticket_id:ticket_id})
+    
 
-    const modify_ticket = (ticket_id, value, att) => setTicketList({type:'modify', ticket_id:ticket_id, value:value, att:att})
+    const modify_ticket = (ticket_id, value, att) => {
+        setTicketList({type:'modify', ticket_id:ticket_id, value:value, att:att})
+    }
 
         
     const submit = (e) => {
@@ -118,13 +121,13 @@ const reducer = (state, action) => {
             ]
 
         case 'remove':
-            var newState = state.filter(ticket => ticket.ticket_id !== action.id)
+            var newState = state.filter(ticket => ticket.ticket_id !== action.ticket_id)
             return [
                 ...newState
             ]
 
         case 'modify':
-            let object = state.filter(ticket => ticket.ticket_id === action.id)[0]
+            let object = state.filter(ticket => ticket.ticket_id === action.ticket_id)[0]
             object[action.att] = action.value
             return [
                 ...state,
